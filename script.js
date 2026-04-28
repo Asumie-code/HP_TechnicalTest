@@ -214,6 +214,7 @@ $(() => {
       renderData(appData);
       tracking();
       slide()
+      clean()
     })
     .fail((error) => console.error("Error loading data:", error));
 });
@@ -284,16 +285,19 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 
   update();
   start();
-  document.querySelectorAll("*").forEach(el => {
-    el.childNodes.forEach(node => {
-      if (node.nodeType === 3) {
-        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
-      }
-    });
-  });
+
 });
 }
 
 
 
 
+function clean() {
+    document.querySelectorAll("*").forEach(el => {
+    el.childNodes.forEach(node => {
+      if (node.nodeType === 3) {
+        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
+      }
+    });
+  });
+}
