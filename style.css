@@ -1,0 +1,45 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+
+#position_1 {
+
+}
+
+
+#position_2 {
+
+}
+
+.deviceInfoPanel {
+  display: flex;
+}
+
+.deviceImage {
+}
+
+.deviceInfoLabel {
+}
+
+.deviceSerialNumberSelector {
+}
+
+.deviceSerialNumber {
+}
+
+.deviceSerialNumberSelected {
+}
+
+.deviceInfoLabels {
+}
+
+.deviceInfoProperties {
+}
+
+.deviceInfoProperty {
+}

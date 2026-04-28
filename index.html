@@ -3,9 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>tech_test</title>
 </head>
 <body>
-    hello world
+    <section id="device">
+        <div>
+            <div><img class="deviceImage" width="200px" src="" alt="Device visual display"></div>
+        </div>
+        <div>
+            <div>
+                <div>
+                    <p class="deviceInfoLabel">Serial number:</p>
+                    <div class="deviceSerialNumberSelector">
+                        <div class="deviceSerialNumber" data-device-id="device1">ABC123</div>
+                        <div class="deviceSerialNumber" data-device-id="device2">XYZ789</div>
+                        <div class="deviceSerialNumber" data-device-id="device1">5656646XD</div>
+                        <div class="deviceSerialNumber deviceSerialNumberSelected" data-device-id="device2">MNO789PQR</div>
+                    </div>
+                </div>
+                <div class="deviceInfoPanel">
+                    <div class="deviceInfoLabels">
+
+                        <p class="deviceInfoLabel">Device name:</p>
+                        <p class="deviceInfoLabel">Warranty status:</p>
+                        <p class="deviceInfoLabel">Product number:</p>
+                    </div>
+                    <div class="deviceInfoProperties">
+                        <p class="deviceInfoProperty">{deviceName}</p>
+                        <p class="deviceInfoProperty">{warrantyStatus}</p>
+                        <p class="deviceInfoProperty">{productNumber}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section id="position_1">
+        
+    </section>
+    <hr>
+    <section id="position_2">
+
+    </section>
+    <section id="log">
+
+    </section>
+    <footer id="sticky-footer">
+        
+    </footer>
+    
 </body>
 </html>

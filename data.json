@@ -1,0 +1,56 @@
+{
+    "templates": {
+        "banner": "", 
+        "carousel": "", 
+        "SKU": "", 
+        "small": "", 
+        "footer": ""
+    }, 
+    "containers": {
+      "promos_pos_1":   {
+          "html": "", 
+          "wrapper": "position_1", 
+          "title": ""
+        }, 
+        "promos_pos_2":   {
+            "html": "", 
+            "wrapper": "position_2", 
+            "title": ""
+          }, 
+        "extras_pos_1": {
+          "html": "", 
+          "wrapper": "position_1", 
+          "title": ""
+        },
+          "extras_pos_2": {
+            "html": "", 
+            "wrapper": "position_2", 
+            "title": ""
+          }
+    },
+    "offers": [
+        {
+            "id": "",
+            "title": "",
+            "description": "",
+            "price": "",
+            "buttonText": "",
+            "image": "",
+            "template": "",
+            "wrapper": ""
+        }
+    ], 
+      "deviceOffers": {
+        "device1": []
+  }, 
+  "devices": [
+    {
+      "id": "",
+      "name": "",
+      "serial": "",
+      "warranty": "",
+      "image": ""
+    }
+
+  ]
+}

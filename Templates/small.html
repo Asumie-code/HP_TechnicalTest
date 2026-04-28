@@ -1,0 +1,90 @@
+<style>
+    .small {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 1px 4px 1px rgb(33, 33, 33, 0.2);
+        overflow: hidden;
+        display: flex;
+        align-items: stretch;
+        height: 188px;
+        max-height: 188px;
+        font-family: inter, sans-serif;
+    }
+
+    .small__image-wrapper {
+        width: 282px;
+        min-width: 180px;
+        border-radius: 16px;
+        flex-shrink: 0;
+        overflow: hidden;
+    }
+
+    .small__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .small__text {
+        padding: 20px 30px;
+    }
+
+    .small__title {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 32px;
+        margin: 0px 0px 10px 0px;
+        color: #111827;
+        max-height: 32px;
+        max-width: 25ch;
+        text-wrap: nowrap;
+    }
+
+    .small__description {
+        font-size: 14px;
+        color: #6b7280;
+        margin: 0px 0px 20px 0px;
+        line-height: 1.5;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 24px;
+        height: 48px;
+        overflow: hidden;
+        max-width: 38ch;
+    }
+
+    .small__cta-wrapper {}
+
+    .small__button {
+        color: #fff;
+        background-color: #0278AB;
+        border-radius: 8px;
+        padding: 8px 20px;
+        max-width: 200px;
+        border: none;
+        font-size: 16px;
+        line-height: 20px;
+        text-wrap: nowrap;
+        cursor: pointer;
+    }
+
+    .small__button:hover {
+        background-color: #035C84;
+    }
+
+    .small__button:active,
+    .small__button:focus-visible {
+        background-color: #014667;
+        cursor: pointer;
+        outline: none;
+    }
+</style>
+<div class="small">
+    <div class="small__image-wrapper"> <img src="" alt="Offer image" class="small__image" /> </div>
+    <div class="small__text">
+        <p class="small__title">Small Tile Offer Title</p>
+        <p class="small__description">Small tile offer description - Lorem ipsum dolor sit amet, consectetur...</p>
+        <button class="small__button">Offer button</button>
+    </div>
+</div>
