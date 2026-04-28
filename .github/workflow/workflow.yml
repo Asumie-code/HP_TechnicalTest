@@ -1,0 +1,28 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: ["main"]
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: [actions/checkout@v4](https://github.com)
+      
+      # Optional: Add your build steps here (e.g., npm run build)
+
+      - name: Upload artifact
+        uses: [actions/upload-pages-artifact@v3](https://github.com/actions/upload-pages-artifact)
+        with:
+          path: '.' # Source directory to upload
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: [actions/deploy-pages@v4](https://github.com/actions/deploy-pages)
