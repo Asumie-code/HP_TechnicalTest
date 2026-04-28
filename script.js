@@ -85,7 +85,7 @@ function updateTemplate(offer) {
   if (!templateSource) return "";
 
   return templateSource.replace(/{{\s*(\w+)\s*}}/g, (match, field) => {
-    if (field in offer) return offer[field];
+    if (field in offer) return clean(offer[field]);
     return "";
   });
 }
@@ -108,7 +108,7 @@ function appendTemplate(data, device) {
     const htmlString = updateTemplate(offer);
     const targetSection = document.getElementById(offer.wrapper);
     if (targetSection && htmlString) {
-      targetSection.insertAdjacentHTML("beforeend", htmlString);
+      targetSection.insertAdjacentHTML("beforeend", clean(htmlString));
     }
   });
 }
@@ -293,3 +293,7 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 });
 });
 }
+
+
+
+const clean = s => s.replace(/&nbsp;|\u00A0/g, ' ');
