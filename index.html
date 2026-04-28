@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="module" src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -16,7 +15,7 @@
             <div><img class="deviceImage" width="200px" src="" alt="Device visual display"></div>
         </div>
         <div>
-            <div id="banner">
+            <div>
                 <div>
                     <p class="deviceInfoLabel">Select device:</p>
                     <select id="productDropdown" class="deviceDropdown">                    
@@ -37,18 +36,19 @@
 
     <section id="position_1">
 
-       <div class="carousel-container"><div id="carousel_wrapper" class="carousel-track">
+       <div class="carousel-container">
+            <div id="carousel_wrapper" class="carousel-track"></div> 
+            <div class="button-container">
+                <button class="carousel-prev">←</button>
+                <button class="carousel-next">→</button>
+            </div>
+          
+        </div>
+        
 
- 
-
-        </div> <button class="carousel-prev">←</button>
-
-    <button class="carousel-next">→</button></div>
         <div class="right_column_div">
-            <div id="right_tile_1">
-            </div>
-            <div id="right_tile_2">
-            </div>
+            <div id="right_tile_1"></div>
+            <div id="right_tile_2"></div>
         </div>
     </section>
 
@@ -57,6 +57,7 @@
 
     </section>
     <section id="event-log">
+
 
     </section>
     <footer id="sticky-footer">

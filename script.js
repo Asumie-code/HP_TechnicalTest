@@ -36,6 +36,7 @@ function selectDevice(productValue) {
 
   const dropdown = document.getElementById("productDropdown");
   if (dropdown) dropdown.value = selectedDevice.id;
+  slide();
 }
 
 /**
@@ -108,7 +109,12 @@ function appendTemplate(data, device) {
     const htmlString = updateTemplate(offer);
     const targetSection = document.getElementById(offer.wrapper);
     if (targetSection && htmlString) {
-      targetSection.insertAdjacentHTML("beforeend",htmlString);
+      targetSection.insertAdjacentHTML("beforeend", htmlString);
+      handleEvent("display", offerId);
+      Array.from(targetSection.children).forEach((child) => {
+        child.addEventListener("click", () => handleEvent("click", offerId));
+        child.addEventListener("focusin", () => handleEvent("focus", offerId));
+      });
     }
   });
 }
@@ -169,135 +175,141 @@ function renderSerialNumberList(devices = []) {
   });
 }
 
-function tracking() {
-  document.querySelectorAll("section").forEach((section) => {
-    Array.from(section.children).forEach((child) => {
-      function handleEvent(type) {
-        const event = {
-          type,
-          id: child.className || null,
-          timestamp: new Date().toISOString(),
-        };
+function handleEvent(type = "display", offerId) {
+  const event = {
+    type,
+    id: offerId || null,
+    timestamp: new Date().toISOString(),
+  };
 
-        console.log(event);
+  const log = document.getElementById("event-log");
+  const li = document.createElement("li");
+  li.className = "event-item";
+  li.textContent = `event : ${event.type}, event_element: ${event.id} time: ${event.timestamp}`;
+  log.prepend(li);
 
-        const log = document.getElementById("event-log");
-        const li = document.createElement("li");
-        li.className = "event-item";
-        li.textContent = `event : ${event.type}, event_element: ${event.id} time: ${event.timestamp}`;
-        log.prepend(li);
+  // Remove oldest item if exceeds 4 elements
+  const eventItems = log.querySelectorAll(".event-item");
+  if (eventItems.length > 4) {
+    eventItems[eventItems.length - 1].remove();
+  }
 
-        // Remove oldest item if exceeds 4 elements
-        const eventItems = log.querySelectorAll(".event-item");
-        if (eventItems.length > 4) {
-          eventItems[eventItems.length - 1].remove();
-        }
+  console.log(event);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  
+  fetch("data.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Failed to load data.json: ${response.status} ${response.statusText}`,
+        );
       }
+      return response.json();
+    })
+    .then((data) => {
+      appData = data;
+      renderData(appData);
+      slide();
+      clean();
+      addCloseButton();
+    })
+    .catch((error) => console.error("Error loading data:", error));
 
-      // Click tracking
-      child.addEventListener("click", () => handleEvent("click"));
-
-      // Focus tracking (keyboard/tab)
-      child.addEventListener("focusin", () => handleEvent("focus"));
+  const dropdown = document.getElementById("productDropdown");
+  if (dropdown) {
+    dropdown.addEventListener("change", (event) => {
+      handleProductSelection(event.target.value);
     });
+  }
+});
+
+function addCloseButton() {
+  const footer = document.getElementById("sticky-footer");
+  if (!footer) return;
+
+  const closeBtn = document.createElement("button");
+  closeBtn.id = "close-footer";
+  closeBtn.className = "footer-close-btn";
+  closeBtn.setAttribute("aria-label", "Close footer");
+  closeBtn.textContent = "×";
+
+  closeBtn.addEventListener("click", () => {
+    footer.style.display = "none";
+  });
+
+  footer.appendChild(closeBtn);
+}
+
+function slide() {
+  document.querySelectorAll(".carousel-container").forEach((container) => {
+    const slides = Array.from(container.querySelectorAll(".carousel"));
+    const nextBtn = container.querySelector(".carousel-next");
+    const prevBtn = container.querySelector(".carousel-prev");
+
+    let index = 0;
+    let timer = null;
+    let paused = false;
+
+    const update = () => {
+      slides.forEach((s, i) => {
+        s.classList.toggle("active", i === index);
+      });
+    };
+
+    const schedule = () => {
+      timer = setTimeout(() => {
+        if (!paused) next();
+        schedule();
+      }, 5000);
+    };
+
+    const next = () => {
+      index = (index + 1) % slides.length;
+      update();
+    };
+
+    const prev = () => {
+      index = (index - 1 + slides.length) % slides.length;
+      update();
+    };
+
+    const start = () => {
+      paused = false;
+      clearTimeout(timer);
+      schedule();
+    };
+
+    const stop = () => {
+      paused = true;
+      clearTimeout(timer);
+    };
+
+    nextBtn.onclick = () => {
+      next();
+      start(); // resets cycle cleanly
+    };
+
+    prevBtn.onclick = () => {
+      prev();
+      start();
+    };
+
+    container.addEventListener("mouseenter", stop);
+    container.addEventListener("mouseleave", start);
+
+    update();
+    start();
   });
 }
 
-// Execution on document ready
-$(() => {
-  $.ajax({
-    url: "data.json",
-    dataType: "json",
-  })
-    .done((data) => {
-      appData = data;
-      renderData(appData);
-      tracking();
-      slide()
-      clean()
-    })
-    .fail((error) => console.error("Error loading data:", error));
-});
-
-// Handle product dropdown change
-$("#productDropdown").on("change", function () {
-  const selectedValue = $(this).val();
-  handleProductSelection(selectedValue);
-});
-
-
-function slide() {
-document.querySelectorAll(".carousel-container").forEach((container) => {
-  const slides = Array.from(container.querySelectorAll(".carousel"));
-  const nextBtn = container.querySelector(".carousel-next");
-  const prevBtn = container.querySelector(".carousel-prev");
-
-  let index = 0;
-  let timer = null;
-  let paused = false;
-
-  const update = () => {
-    slides.forEach((s, i) => {
-      s.classList.toggle("active", i === index);
-    });
-  };
-
-  const schedule = () => {
-    timer = setTimeout(() => {
-      if (!paused) next();
-      schedule();
-    }, 5000);
-  };
-
-  const next = () => {
-    index = (index + 1) % slides.length;
-    update();
-  };
-
-  const prev = () => {
-    index = (index - 1 + slides.length) % slides.length;
-    update();
-  };
-
-  const start = () => {
-    paused = false;
-    clearTimeout(timer);
-    schedule();
-  };
-
-  const stop = () => {
-    paused = true;
-    clearTimeout(timer);
-  };
-
-  nextBtn.onclick = () => {
-    next();
-    start(); // resets cycle cleanly
-  };
-
-  prevBtn.onclick = () => {
-    prev();
-    start();
-  };
-
-  container.addEventListener("mouseenter", stop);
-  container.addEventListener("mouseleave", start);
-
-  update();
-  start();
-
-});
-}
-
-
-
-
 function clean() {
-    document.querySelectorAll("*").forEach(el => {
-    el.childNodes.forEach(node => {
-      if (node.nodeType === 3) {
-        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
-      }
-    });
+  document.querySelectorAll("*").forEach((el) => {
+    el.childNodes.forEach((node) => {
+      if (node.nodeType === 3) {
+        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
+      }
+    });
   });
 }
