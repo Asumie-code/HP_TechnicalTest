@@ -226,55 +226,63 @@ $("#productDropdown").on("change", function () {
 
 
 function slide() {
-  document.querySelectorAll(".carousel-container").forEach((container) => {
-    const track = container.querySelector(".carousel-track");
-    const slides = Array.from(track.querySelectorAll(".carousel"));
+document.querySelectorAll(".carousel-container").forEach((container) => {
+  const slides = Array.from(container.querySelectorAll(".carousel"));
+  const nextBtn = container.querySelector(".carousel-next");
+  const prevBtn = container.querySelector(".carousel-prev");
 
-    const nextBtn = container.querySelector(".carousel-next");
-    const prevBtn = container.querySelector(".carousel-prev");
+  let index = 0;
+  let timer = null;
+  let paused = false;
 
-    let index = 0;
-    let interval;
+  const update = () => {
+    slides.forEach((s, i) => {
+      s.classList.toggle("active", i === index);
+    });
+  };
 
-    const updatePosition = () => {
-      track.style.transform = `translateX(-${index * 100}%)`;
-    };
+  const schedule = () => {
+    timer = setTimeout(() => {
+      if (!paused) next();
+      schedule();
+    }, 5000);
+  };
 
-    const goNext = () => {
-      index = (index + 1) % slides.length;
-      updatePosition();
-    };
+  const next = () => {
+    index = (index + 1) % slides.length;
+    update();
+  };
 
-    const goPrev = () => {
-      index = (index - 1 + slides.length) % slides.length;
-      updatePosition();
-    };
+  const prev = () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  };
 
-    const startAuto = () => {
-      interval = setInterval(goNext, 5000);
-    };
+  const start = () => {
+    paused = false;
+    clearTimeout(timer);
+    schedule();
+  };
 
-    const stopAuto = () => {
-      clearInterval(interval);
-    };
+  const stop = () => {
+    paused = true;
+    clearTimeout(timer);
+  };
 
-    if (nextBtn)
-      nextBtn.onclick = () => {
-        stopAuto();
-        goNext();
-        startAuto();
-      };
+  nextBtn.onclick = () => {
+    next();
+    start(); // resets cycle cleanly
+  };
 
-    if (prevBtn)
-      prevBtn.onclick = () => {
-        stopAuto();
-        goPrev();
-        startAuto();
-      };
+  prevBtn.onclick = () => {
+    prev();
+    start();
+  };
 
-    container.addEventListener("mouseenter", stopAuto);
-    container.addEventListener("mouseleave", startAuto);
+  container.addEventListener("mouseenter", stop);
+  container.addEventListener("mouseleave", start);
 
-    startAuto();
-  });
+  update();
+  start();
+});
 }

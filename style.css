@@ -20,10 +20,9 @@ section {
 }
 
 #position_1 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  align-items: start;
+  display: flex;
+  gap: 20px;
+  
 }
 
 #position_1 .carousel {
@@ -106,16 +105,39 @@ section {
 }
 
 .carousel-container {
-  position: relative;
-  overflow: hidden;
+  min-width: calc(50% - 10px);
 }
 
-.carousel-track {
-  display: flex;
-  transition: transform 0.5s ease;
+
+carousel-track {
+  position: relative;
+  height: 100%;
 }
+
+
 
 .carousel {
-  min-width: 100%;
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+
+
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+
+
+  pointer-events: none;
+}
+
+
+
+.carousel.active {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
 }
