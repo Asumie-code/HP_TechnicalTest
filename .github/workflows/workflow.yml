@@ -14,15 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: [actions/checkout@v4](https://github.com)
-      
+        uses: actions/checkout@v4
+
       # Optional: Add your build steps here (e.g., npm run build)
 
       - name: Upload artifact
-        uses: [actions/upload-pages-artifact@v3](https://github.com/actions/upload-pages-artifact)
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Source directory to upload
-          
+          path: "." # Source directory to upload
+
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: [actions/deploy-pages@v4](https://github.com/actions/deploy-pages)
+        uses: actions/deploy-pages@v4
