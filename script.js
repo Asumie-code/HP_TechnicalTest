@@ -85,7 +85,7 @@ function updateTemplate(offer) {
   if (!templateSource) return "";
 
   return templateSource.replace(/{{\s*(\w+)\s*}}/g, (match, field) => {
-    if (field in offer) return clean(offer[field]);
+    if (field in offer) return offer[field];
     return "";
   });
 }
@@ -108,7 +108,7 @@ function appendTemplate(data, device) {
     const htmlString = updateTemplate(offer);
     const targetSection = document.getElementById(offer.wrapper);
     if (targetSection && htmlString) {
-      targetSection.insertAdjacentHTML("beforeend", clean(htmlString));
+      targetSection.insertAdjacentHTML("beforeend",htmlString);
     }
   });
 }
@@ -284,9 +284,16 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 
   update();
   start();
+  document.querySelectorAll("*").forEach(el => {
+    el.childNodes.forEach(node => {
+      if (node.nodeType === 3) {
+        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
+      }
+    });
+  });
 });
 }
 
 
 
-const clean = s => s.replace(/&nbsp;|\u00A0/g, ' ');
+
