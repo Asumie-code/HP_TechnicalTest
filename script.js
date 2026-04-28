@@ -284,5 +284,6 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 
   update();
   start();
+  const removeNbsp = s => s.replace(/&nbsp;|\u00A0/g, ' ');
 });
 }
