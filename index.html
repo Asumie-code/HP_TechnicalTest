@@ -16,23 +16,12 @@
             <div><img class="deviceImage" width="200px" src="" alt="Device visual display"></div>
         </div>
         <div>
-            <div>
+            <div id="banner">
                 <div>
-                    <p class="deviceInfoLabel">Serial number:</p>
-                    <div class="deviceSerialNumberSelector">
-                        <div class="deviceSerialNumber" data-device-id="device1">ABC123</div>
-                        <div class="deviceSerialNumber" data-device-id="device2">XYZ789</div>
-                        <div class="deviceSerialNumber" data-device-id="device1">5656646XD</div>
-                        <div class="deviceSerialNumber deviceSerialNumberSelected" data-device-id="device2">MNO789PQR</div>
-                    </div>
+                    <p class="deviceInfoLabel">Select device:</p>
+                    <select id="productDropdown" class="deviceDropdown">                    
+                    </select>
                 </div>
-                <div class="deviceInfoPanel">
-                    <div class="deviceInfoLabels">
-
-                        <p class="deviceInfoLabel">Device name:</p>
-                        <p class="deviceInfoLabel">Warranty status:</p>
-                        <p class="deviceInfoLabel">Product number:</p>
-                    </div>
                     <div class="deviceInfoProperties">
                         <p class="deviceInfoProperty">{deviceName}</p>
                         <p class="deviceInfoProperty">{warrantyStatus}</p>
@@ -42,15 +31,45 @@
             </div>
         </div>
     </section>
-    <hr>
-    <section id="position_1">
-        
-    </section>
-    <hr>
+ <hr>
+
+     
+
+    <section id="position_1">
+
+       <div class="carousel-container"><div id="carousel_wrapper" class="carousel-track">
+
+ 
+
+        </div> <button class="carousel-prev">←</button>
+
+    <button class="carousel-next">→</button></div>
+
+        <div>
+
+            <div id="right_tile_1">
+
+ 
+
+            </div>
+
+            <div id="right_tile_2">
+
+ 
+
+            </div>
+
+        </div>
+
+       
+
+    </section>
+
+    <hr>
     <section id="position_2">
 
     </section>
-    <section id="log">
+    <section id="event-log">
 
     </section>
     <footer id="sticky-footer">
