@@ -284,6 +284,12 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 
   update();
   start();
-  const removeNbsp = s => s.replace(/&nbsp;|\u00A0/g, ' ');
+  document.querySelectorAll("*").forEach(el => {
+    el.childNodes.forEach(node => {
+        if (node.nodeType === 3) {
+            node.textContent = removeNbsp(node.textContent);
+        }
+    });
+});
 });
 }
