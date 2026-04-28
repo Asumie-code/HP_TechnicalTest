@@ -284,13 +284,6 @@ document.querySelectorAll(".carousel-container").forEach((container) => {
 
   update();
   start();
-  document.querySelectorAll("*").forEach(el => {
-    el.childNodes.forEach(node => {
-        if (node.nodeType === 3) {
-            node.textContent = removeNbsp(node.textContent);
-        }
-    });
-});
 });
 }
 
