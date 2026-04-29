@@ -56,12 +56,12 @@ function renderDevice(device) {
     document.querySelectorAll(".deviceInfoProperty"),
   );
   const values = [
-    `Product name: ${device.name}` || "",
-    `Warranty status: ${device.warranty}` || "",
-    `Product Number: ${device.productNumber}` || "",
+    `<span>Product name:</span> ${device.name}` || "",
+    `<span>Warranty status:</ ${device.warranty}` || "",
+    `<span>Product Number: ${device.productNumber}` || "",
   ];
   infoProperties.forEach((prop, index) => {
-    prop.textContent = values[index] || "";
+    prop.innerHTML = values[index] || "";
   });
 
   const serialItems = document.querySelectorAll(".deviceSerialNumber");
