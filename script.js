@@ -57,8 +57,8 @@ function renderDevice(device) {
   );
   const values = [
     `<span>Product name:</span> ${device.name}` || "",
-    `<span>Warranty status:</ ${device.warranty}` || "",
-    `<span>Product Number: ${device.productNumber}` || "",
+    `<span>Warranty status:</span> ${device.warranty}` || "",
+    `<span>Product Number: </span>${device.productNumber}` || "",
   ];
   infoProperties.forEach((prop, index) => {
     prop.innerHTML = values[index] || "";

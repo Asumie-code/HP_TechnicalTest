@@ -18,6 +18,7 @@ h2 {
   margin-bottom: 30px;
   padding-bottom: 0;
 }
+
 section {
   flex: 1;
 }
@@ -59,23 +60,24 @@ section {
 .footer-close-btn:active {
   background-color: #e5e7eb;
 }
+
 #device {
-  width: 597px; 
-  height: 165px; 
+  width: 597px;
+  height: 165px;
   display: flex;
   margin: 0 auto;
   align-items: center;
   gap: 20px;
   padding: 20px;
   border-radius: 12px;
-  
+
 }
 
-#device > div:first-child {
+#device>div:first-child {
   flex-shrink: 0;
 }
 
-#device > div:first-child > div {
+#device>div:first-child>div {
   background-color: #fff;
   border-radius: 8px;
   padding: 16px;
@@ -139,6 +141,10 @@ section {
   line-height: 1.4;
 }
 
+.deviceInfoProperty span {
+  color: black;
+}
+
 
 
 
@@ -179,34 +185,26 @@ section {
 
 
 .right_column_div {
-  display: flex; 
+  display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.deviceImage {
-}
+.deviceImage {}
 
-.deviceInfoLabel {
-}
+.deviceInfoLabel {}
 
-.deviceSerialNumberSelector {
-}
+.deviceSerialNumberSelector {}
 
-.deviceSerialNumber {
-}
+.deviceSerialNumber {}
 
-.deviceSerialNumberSelected {
-}
+.deviceSerialNumberSelected {}
 
-.deviceInfoLabels {
-}
+.deviceInfoLabels {}
 
-.deviceInfoProperties {
-}
+.deviceInfoProperties {}
 
-.deviceInfoProperty {
-}
+.deviceInfoProperty {}
 
 #event-log {
   list-style: none;
@@ -234,6 +232,7 @@ section {
     opacity: 0;
     transform: translateX(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -258,22 +257,16 @@ carousel-track {
   top: 0;
   left: 0;
   width: 100%;
-
-
-
   opacity: 0;
   transform: scale(0.95);
   transition: opacity 0.5s ease, transform 0.5s ease;
-
-
-
   pointer-events: none;
 }
 
 
 
 .carousel.active {
-   max-width: calc(100% - 60px);
+  max-width: calc(100% - 60px);
   max-height: 346px;
   /* margin-bottom: 300px; */
   opacity: 1;
@@ -283,37 +276,23 @@ carousel-track {
 }
 
 
-
-
-  .carousel-controls {
-
+.carousel-controls {
   position: absolute;
-
-  bottom: 0px;
-
+  bottom: -26px;
   right: 15.5px;
-
   display: flex;
-
   gap: 16px;
-
   background: #fff;
-
-  padding: 12px 16px;
-
-  border-radius: 20px;
-
-  width: fit-content;
-
-  box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2);
   z-index: 99;
-
+  padding: 12px 16px;
+  border-radius: 20px;
+  width: fit-content;
+  box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2);
 }
 
 
 
 .carousel-prev {
-
   padding-left: 10px;
   z-index: 100;
 
@@ -322,7 +301,6 @@ carousel-track {
 
 
 .carousel-next {
-
   padding-right: 10px;
   z-index: 100;
 }
@@ -330,73 +308,48 @@ carousel-track {
 
 
 .carousel-control-button {
-
   width: 30px;
-
   height: 30px;
-
   border-radius: 50%;
-
   background: #0278AB;
-
   border: none;
-
   display: flex;
-
   align-items: center;
-
   justify-content: center;
-
   cursor: pointer;
-
 }
 
 
 
 .carousel-control-button:hover {
-
   background: #035C84;
-
 }
 
 
 
 .carousel-control-button:focus-visible,
-
-.carousel-control-button:active {
-
+.carousel-control-button:active,
+.carousel-control-button:focus {
   background: #014667;
-
-  outline: none;
-
+  outline:none;
+  outline-offset: 2px;
 }
 
 
 
 .carousel-control-button div {
-
   width: 10px;
-
   height: 10px;
-
   border-top: 2px solid white;
-
   border-right: 2px solid white;
-
 }
 
-
-
 .carousel-prev div {
-
   transform: rotate(-135deg);
 
 }
 
-
-
 .carousel-next div {
-
   transform: rotate(45deg);
 
 }
