@@ -198,7 +198,6 @@ function handleEvent(type = "display", offerId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  
   fetch("data.json")
     .then((response) => {
       if (!response.ok) {
