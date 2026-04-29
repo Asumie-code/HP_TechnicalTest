@@ -56,9 +56,9 @@ function renderDevice(device) {
     document.querySelectorAll(".deviceInfoProperty"),
   );
   const values = [
-    `name: ${device.name}` || "",
-    `warranty: ${device.warranty}` || "",
-    `productNumber: ${device.productNumber}` || "",
+    `Product name: ${device.name}` || "",
+    `Warranty status: ${device.warranty}` || "",
+    `Product Number: ${device.productNumber}` || "",
   ];
   infoProperties.forEach((prop, index) => {
     prop.textContent = values[index] || "";
