@@ -47,12 +47,36 @@
             cursor: pointer;
             outline: none;
         }
+
+        @media (max-width: 600px) {
+            .carousel {
+                padding: 20px;
+                height: 295px;
+            }
+
+            .carousel__image {
+                max-height: 76px;
+                margin-bottom: 20px;
+            }
+
+            .carousel__title {
+                font-size: 18px;
+                line-height: 24px;
+            }
+
+            .carousel__description {
+                font-size: 16px;
+                line-height: 24px;
+                margin-bottom: 10px;
+                color: #737373;
+            }
+        }
     </style>
     <div class=carousel__image-wrapper>
-        <image class=carousel__image title="Offer logo" alt="Offer logo">
+        <image src='{{image}}' class=carousel__image title=Offer logo alt=Offer logo>
     </div>
     <div class=carousel__text-wrapper>
-        <div class=carousel__title></div>
-        <div class=carousel__description></div> <button title="CTA" class=carousel__button></button>
+        <div class=carousel__title>{{title}}</div>
+        <div class=carousel__description>{{description}}</div> <button title=CTA class=carousel__button>{{buttonText}}</button>
     </div>
 </div>

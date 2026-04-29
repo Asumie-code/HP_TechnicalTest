@@ -135,7 +135,9 @@ function emptyWrappers() {
   document.getElementById("right_tile_1").innerHTML = "";
   document.getElementById("right_tile_2").innerHTML = "";
   document.getElementById("position_2").innerHTML = "";
-  document.getElementById("sticky-footer").innerHTML = "";
+  document.getElementById("sticky-footer").querySelectorAll(".footer").forEach(el => el.remove());
+  document.getElementById("sticky-footer").querySelectorAll("style").forEach(el => el.remove());
+
 }
 
 /**
@@ -179,13 +181,14 @@ function handleEvent(type = "display", offerId) {
   const event = {
     type,
     id: offerId || null,
-    timestamp: new Date().toISOString(),
+    timestamp: new Date().toLocaleString("en-GB").replace(",", ""),
+    product: document.getElementById("productDropdown").value
   };
-
+  const selectedOption = document.getElementById("productDropdown").value;
   const log = document.getElementById("event-log");
   const li = document.createElement("li");
   li.className = "event-item";
-  li.textContent = `event : ${event.type}, event_element: ${event.id} time: ${event.timestamp}`;
+  li.textContent = `event : ${event.type},_______offer: ${event.id},_______for: ${selectedOption},_______at: ${event.timestamp}`;
   log.prepend(li);
 
   // Remove oldest item if exceeds 4 elements
@@ -211,7 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
       appData = data;
       renderData(appData);
       slide();
-      clean();
       addCloseButton();
     })
     .catch((error) => console.error("Error loading data:", error));
@@ -300,15 +302,30 @@ function slide() {
 
     update();
     start();
+    handleCarouselControls()
+    updateFooterButtonVisibility();
   });
 }
 
-function clean() {
-  document.querySelectorAll("*").forEach((el) => {
-    el.childNodes.forEach((node) => {
-      if (node.nodeType === 3) {
-        node.nodeValue = node.nodeValue.replace(/\u00A0/g, " ");
-      }
-    });
-  });
+function handleCarouselControls() {
+  const carousel = document.getElementById("carousel_wrapper");
+  const controls = document.querySelector(".carousel-controls");
+
+  if (!carousel || !controls) return;
+
+  if (carousel.children.length <= 1) {
+    controls.style.display = "none";
+  } else {
+    controls.style.display = "flex"; 
+  }
+}
+function updateFooterButtonVisibility() {
+  const footer = document.getElementById("sticky-footer");
+  const closeBtn = document.querySelector(".footer-close-btn");
+
+  const hasFooter = footer && footer.querySelector(".footer");
+
+  if (closeBtn) {
+    closeBtn.style.display = hasFooter ? "block" : "none";
+  }
 }

@@ -8,7 +8,6 @@ body {
   margin-bottom: 100px;
 }
 
-
 h2 {
   text-align: left;
   width: 1274px;
@@ -30,7 +29,7 @@ section {
   width: 100%;
   background-color: #fff;
   border-top: 1px solid #e5e7eb;
-
+   z-index: 100;
 }
 
 .footer-close-btn {
@@ -70,7 +69,6 @@ section {
   gap: 20px;
   padding: 20px;
   border-radius: 12px;
-
 }
 
 #device>div:first-child {
@@ -81,7 +79,6 @@ section {
   background-color: #fff;
   border-radius: 8px;
   padding: 16px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,15 +107,21 @@ section {
 }
 
 .deviceDropdown {
-  width: 100%;
+  width: 160px;
   padding: 8px 12px;
   border: 1px solid #d1d5db;
-  border-radius: 6px;
+  border-radius: 12px;
   background-color: #fff;
   font-size: 14px;
   color: #374151;
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deviceDropdown option:hover{
+background-color: #0278AB;
+color: white;
+border-radius: 8;
 }
 
 .deviceDropdown:focus {
@@ -130,7 +133,7 @@ section {
 .deviceInfoProperties {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0px;
 }
 
 .deviceInfoProperty {
@@ -145,17 +148,11 @@ section {
   color: black;
 }
 
-
-
-
-
-
 #position_1 {
   justify-content: center;
   display: flex;
   gap: 30px;
   max-width: 1218px;
-
 }
 
 #position_1 .carousel {
@@ -183,28 +180,13 @@ section {
   display: flex;
 }
 
-
 .right_column_div {
   display: flex;
   flex-direction: column;
   gap: 30px;
 }
 
-.deviceImage {}
 
-.deviceInfoLabel {}
-
-.deviceSerialNumberSelector {}
-
-.deviceSerialNumber {}
-
-.deviceSerialNumberSelected {}
-
-.deviceInfoLabels {}
-
-.deviceInfoProperties {}
-
-.deviceInfoProperty {}
 
 #event-log {
   list-style: none;
@@ -244,13 +226,10 @@ section {
   min-width: 609px;
 }
 
-
 carousel-track {
   position: relative;
   height: 100%;
 }
-
-
 
 .carousel {
   position: absolute;
@@ -263,8 +242,6 @@ carousel-track {
   pointer-events: none;
 }
 
-
-
 .carousel.active {
   max-width: calc(100% - 60px);
   max-height: 346px;
@@ -275,7 +252,6 @@ carousel-track {
   z-index: 2;
 }
 
-
 .carousel-controls {
   position: absolute;
   bottom: -26px;
@@ -283,29 +259,22 @@ carousel-track {
   display: flex;
   gap: 16px;
   background: #fff;
-  z-index: 99;
+  z-index: 97;
   padding: 12px 16px;
   border-radius: 20px;
   width: fit-content;
   box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2);
 }
 
-
-
 .carousel-prev {
   padding-left: 10px;
-  z-index: 100;
-
+  z-index: 99;
 }
-
-
 
 .carousel-next {
   padding-right: 10px;
-  z-index: 100;
+  z-index: 99;
 }
-
-
 
 .carousel-control-button {
   width: 30px;
@@ -319,23 +288,17 @@ carousel-track {
   cursor: pointer;
 }
 
-
-
 .carousel-control-button:hover {
   background: #035C84;
 }
-
-
 
 .carousel-control-button:focus-visible,
 .carousel-control-button:active,
 .carousel-control-button:focus {
   background: #014667;
-  outline:none;
+  outline: none;
   outline-offset: 2px;
 }
-
-
 
 .carousel-control-button div {
   width: 10px;
@@ -346,10 +309,60 @@ carousel-track {
 
 .carousel-prev div {
   transform: rotate(-135deg);
-
 }
 
 .carousel-next div {
   transform: rotate(45deg);
-
 }
+ @media (max-width: 1200px) {
+  body{
+    padding: 0 20px;
+  }
+   h2{
+    width: 609px;
+              max-width: 100%;
+   }
+    #position_1 {
+      max-width: 100%;
+      flex-direction: column;
+      align-items: center;
+    }
+    .carousel-container{
+      height: 409px;
+      min-width: 100%;
+          margin-bottom: 20px;
+    }
+    .right_column_div {
+      width: 609px;
+              max-width: 100%;
+  
+    }
+    #position_2{
+      width: 609px;max-width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .carousel.active{
+          max-width: calc(100% - 42px) !important;
+    }
+     .carousel-controls{
+          right: 25.5px;
+    }
+    .carousel-container{
+      height: 334px;
+    }
+      h2{
+    font-size: 14px;
+    font-synthesis: 20px;
+   }
+    #device {
+      width: 100%;
+      height: auto;
+      flex-direction: column;
+      margin: initial;
+    }
+    #position_1 {
+      padding: 0 20px;
+    }
+  }

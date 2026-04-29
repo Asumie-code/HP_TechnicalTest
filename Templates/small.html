@@ -79,12 +79,51 @@
         cursor: pointer;
         outline: none;
     }
+
+    @media (max-width: 600px) {
+        .small {
+            height: initial;
+            max-height: initial;
+            flex-direction: column;
+        }
+
+        .small__image-wrapper {
+            height: 163px;
+            width: 100%;
+            margin-bottom: 10px;
+            max-height: 76px;
+            border-radius: 0px;
+            max-height: 163px;
+            margin-bottom: 0px;
+        }
+
+        .small__text {
+            padding: 20px;
+        }
+
+        .small__title {
+            font-size: 18px;
+            line-height: 24px;
+            margin-bottom: 10px;
+        }
+
+        .small__description {
+            font-size: 16px;
+            line-height: 24px;
+            margin-bottom: 10px;
+            color: #737373;
+        }
+
+        .small__button {
+            margin-bottom: 10px;
+        }
+    }
 </style>
-<div class="small">
-    <div class="small__image-wrapper"> <img src="" alt="Offer image" class="small__image" /> </div>
-    <div class="small__text">
-        <p class="small__title">Small Tile Offer Title</p>
-        <p class="small__description">Small tile offer description - Lorem ipsum dolor sit amet, consectetur...</p>
-        <button class="small__button">Offer button</button>
+<div class=small>
+    <div class=small__image-wrapper> <img src='{{imageSrc}}' alt=Offer image class=small__image /> </div>
+    <div class=small__text>
+        <p class=small__title>{{title}}</p>
+        <p class=small__description>{{description}}</p>
+        <button class=small__button>{{buttonText}}</button>
     </div>
 </div>

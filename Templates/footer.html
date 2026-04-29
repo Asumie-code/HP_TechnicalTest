@@ -1,5 +1,5 @@
 <style>
-    .carousel__button {
+    .footer__button {
         color: #fff;
         background-color: #0278AB;
         border-radius: 8px;
@@ -12,12 +12,12 @@
         cursor: pointer;
     }
 
-    .carousel__button:hover {
+    .footer__button:hover {
         background-color: #035C84;
     }
 
-    .carousel__button:active,
-    .carousel__button:focus-visible {
+    .footer__button:active,
+    .footer__button:focus-visible {
         background-color: #014667;
         cursor: pointer;
         outline: none;
@@ -32,9 +32,18 @@
         gap: 24px;
         border-top: 1px solid #000000;
     }
-</style>
 
-<div class="footer">
-    <div>title</div>
-    <div class="carousel__button">Offer button</div>
+    @media (max-width: 600px) {
+        .footer {
+            justify-content: flex-start;
+            padding-left: 10px;
+        }
+
+        .footer__title {
+            display: none;
+        }
+    }
+</style>
+<div class=footer>
+    <div class=footer__title>{{title}}</div> <button class=footer__button>{{buttonText}}</button>
 </div>

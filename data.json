@@ -1,58 +1,57 @@
 {
-    "templates": {
-        "banner": "<style> .banner { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 168px; max-height: 162px; font-family: Inter, sans-serif; } .banner__image-wrapper { width: 386px; min-width: 180px; border-radius: 16px 0 0 16px; flex-shrink: 0; overflow: hidden; } .banner__image { width: 100%; height: 100%; object-fit: cover; display: block; } .banner__text { padding: 25px 30px; } .banner__title { font-size: 24px; font-weight: 500; line-height: 32px; margin: 0 0 10px 0; color: #111827; max-height: 32px; max-width: 35ch; white-space: nowrap; } .banner__description { font-size: 16px; color: #6b7280; margin: 0 0 10px 0; line-height: 24px; overflow: hidden; max-width: 100ch; } .banner__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .banner__button:hover { background-color: #035C84; } .banner__button:active, .banner__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } </style> <div class=\"banner\"> <div class=\"banner__image-wrapper\"> <img src=\"\" alt=\"Offer image\" class=\"banner__image\" /> </div> <div class=\"banner__text\"> <p class=\"banner__title\">banner Tile Offer Title</p> <p class=\"banner__description\">banner tile offer description - Lorem ipsum dolor sit amet, consectetur...</p> <button class=\"banner__button\">Offer button</button> </div> </div>",
-        "carousel": "<div class='carousel'> <style> .carousel { border-radius: 16px; box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2); padding: 30px; height: 534px; } .carousel__image { max-height: 96px; margin-bottom: 20px; } .carousel__text-wrapper {} .carousel__title { font-size: 32px; } .carousel__description { font-size: 20px; line-height: 28px; margin-bottom: 20px; } .carousel__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .carousel__button:hover { background-color: #035C84; } .carousel__button:active, .carousel__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } </style> <div class='carousel__image-wrapper'> <img src='{{image}}' class='carousel__image' title='Offer logo' alt='{{title}}' /> </div> <div class='carousel__text-wrapper'> <div class='carousel__title'>{{title}}</div> <div class='carousel__description'>{{description}}</div> <button title='CTA' class='carousel__button'>{{buttonText}}</button> </div> </div>",
-        "SKU": "<style> .SKU { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 188px; max-height: 188px; font-family: inter, sans-serif; } .SKU__image-wrapper { width: 282px; border-radius: 16px; min-width: 180px; flex-shrink: 0; overflow: hidden; } .SKU__image { width: 100%; height: 100%; object-fit: cover; display: block; } .SKU__text { padding: 16px 30px; } .SKU__title { font-size: 13px; font-weight: 500; line-height: 20px; margin: 0px 0px 2px 0px; color: #404040; max-height: 32px; max-width: 25ch; background-color: rgba(61, 255, 172, 0.32); white-space: nowrap; border-radius: 17px; padding: 3px 20px; display: inline-block; } .SKU__description { font-size: 16px; color: #6b7280; margin: 0px 0px 1px 0px; line-height: 24px; height: 48px; overflow: hidden; max-width: 38ch; } .SKU__button { background-color: #fff; color: #0278AB; border: 1px solid #0278AB; border-radius: 8px; padding: 7px 19px; max-width: 200px; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .SKU__button:hover { background-color: rgba(2, 120, 171, 0.05); color: #035C84; border: 1px solid #035C84; } .SKU__button:active, .SKU__button:focus-visible { background-color: rgba(2, 120, 171, 0.1); cursor: pointer; outline: none; color: #014667; border: 1px solid #014667; } .SKU__price { font-family: inter, sans-serif; margin: 0px 0px 20px 0px; } </style> <div class='SKU'> <div class='SKU__image-wrapper'> <img src='{{image}}' alt='{{title}}' class='SKU__image' /> </div> <div class='SKU__text'> <p class='SKU__title'>{{title}}</p> <p class='SKU__description'>{{description}}</p> <div class='SKU__price'>{{price}}</div> <button class='SKU__button'>{{buttonText}}</button> </div> </div>",
-        "small": "<style> .small { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 188px; max-height: 188px; font-family: inter, sans-serif; } .small__image-wrapper { width: 282px; min-width: 180px; border-radius: 16px; flex-shrink: 0; overflow: hidden; } .small__image { width: 100%; height: 100%; object-fit: cover; display: block; } .small__text { padding: 20px 30px; } .small__title { font-size: 24px; font-weight: 500; line-height: 32px; margin: 0px 0px 10px 0px; color: #111827; max-height: 32px; max-width: 25ch; white-space: nowrap; } .small__description { font-size: 16px; color: #6b7280; margin: 0px 0px 20px 0px; line-height: 24px; height: 48px; overflow: hidden; max-width: 38ch; } .small__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .small__button:hover { background-color: #035C84; } .small__button:active, .small__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } </style> <div class='small'> <div class='small__image-wrapper'> <img src='{{image}}' alt='{{title}}' class='small__image' /> </div> <div class='small__text'> <p class='small__title'>{{title}}</p> <p class='small__description'>{{description}}</p> <div class='small__price'>{{price}}</div> <button class='small__button'>{{buttonText}}</button> </div> </div>",
-        "footer": "<style> .carousel__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .carousel__button:hover { background-color: #035C84; } .carousel__button:active, .carousel__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } .footer { display: flex; align-items: center; justify-content: center; height: 60px; background-color: #fff; gap: 24px; border-top: 1px solid #000000; } </style> <div class=\"footer\"> <div>title</div> <div class=\"carousel__button\">Offer button</div> </div>"
-    }, 
-
-     "offers": [
+  "templates": {
+    "banner": "<style> .banner { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgba(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 168px; max-height: 162px; font-family: Inter, sans-serif; } .banner__image-wrapper { width: 386px; min-width: 180px; border-radius: 16px 0 0 16px; flex-shrink: 0; overflow: hidden; } .banner__image { width: 100%; height: 100%; object-fit: cover; display: block; } .banner__text { padding: 0px 30px; display: flex; flex-direction: column; justify-content: center; } .banner__title { font-size: 24px; font-weight: 500; line-height: 32px; margin: 0 0 10px 0; color: #111827; max-height: 32px; max-width: 35ch; white-space: nowrap; } .banner__description { font-size: 16px; color: #6b7280; margin: 0 0 10px 0; line-height: 24px; overflow: hidden; max-width: 100ch; } .banner__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; width: max-content; } .banner__button:hover { background-color: #035C84; } .banner__button:active, .banner__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } @media (max-width: 1200px) { .banner__image-wrapper { width: 282px; } .banner__description { max-width: 27ch; } } @media (max-width: 600px) { .banner { height: initial; max-height: initial; flex-direction: column; } .banner__image-wrapper { height: 100px; width: 100%; margin-bottom: 10px; max-height: 76px; border-radius: 0px; max-height: 100px; margin-bottom: 0px; } .banner__text { padding: 20px; } .banner__title { font-size: 18px; line-height: 24px; margin-bottom: 10px; } .banner__description { font-size: 16px; line-height: 24px; margin-bottom: 10px; color: #737373; } .banner__button { margin-bottom: 10px; } } </style> <div class=banner> <div class=banner__image-wrapper> <img src='{{image}}'   alt=Offer image class=banner__image /> </div> <div class=banner__text> <p class=banner__title>{{title}}</p> <p class=banner__description>{{description}}</p> <button class=banner__button>{{buttonText}}</button> </div> </div>",
+    "carousel": "<div class=carousel> <style> .carousel { border-radius: 16px; box-shadow: 0 1px 4px 1px rgb(33, 33, 33, 0.2); padding: 30px; height: 534px; } .carousel__image { max-height: 96px; margin-bottom: 20px; } .carousel__text-wrapper {} .carousel__title { font-size: 32px; } .carousel__description { font-size: 20px; line-height: 28px; margin-bottom: 20px } .carousel__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; text-wrap: nowrap; cursor: pointer; } .carousel__button:hover { background-color: #035C84; } .carousel__button:active, .carousel__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } @media (max-width: 600px) { .carousel { padding: 20px; height: 295px; } .carousel__image { max-height: 76px; margin-bottom: 20px; } .carousel__title { font-size: 18px; line-height: 24px; } .carousel__description { font-size: 16px; line-height: 24px; margin-bottom: 10px; color: #737373; } } </style> <div class=carousel__image-wrapper> <image src='{{image}}' class=carousel__image title=Offer logo alt=Offer logo> </div> <div class=carousel__text-wrapper> <div class=carousel__title>{{title}}</div> <div class=carousel__description>{{description}}</div> <button title=CTA class=carousel__button>{{buttonText}}</button> </div> </div>",
+    "SKU": "<style> .SKU { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgb(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 188px; max-height: 188px; font-family: inter, sans-serif; } .SKU__image-wrapper { width: 282px; display: flex; border-radius: 16px; min-width: 180px; flex-shrink: 0; overflow: hidden; align-items: center; justify-content: center; } .SKU__image { max-width: 80%; max-height: 80%; object-fit: cover; display: block; } .SKU__text { padding: 16px 30px; } .SKU__title { font-size: 13px; font-weight: 500; line-height: 20px; margin: 0px 0px 2px 0px; color: #404040; max-height: 32px; max-width: 25ch; background-color: rgb(61, 255, 172, 0.32); text-wrap: nowrap; border-radius: 17px; padding: 3px 20px; display: inline-block; } .SKU__description { font-size: 14px; color: #6b7280; margin: 0px 0px 1px 0px; line-height: 1.5; font-size: 16px; font-weight: 400; line-height: 24px; height: 48px; overflow: hidden; max-width: 38ch; } .SKU__button { background-color: #fff; color: #0278AB; border: 1px solid #0278AB; border-radius: 8px; padding: 7px 19px; max-width: 200px; font-size: 16px; line-height: 20px; text-wrap: nowrap; cursor: pointer; } .SKU__button:hover { background-color: rgba(2, 120, 171, 0.05); color: #035C84; border: 1px solid #035C84; } .SKU__button:active, .SKU__button:focus-visible { background-color: rgba(2, 120, 171, 0.1); cursor: pointer; outline: none; color: #014667; border: 1px solid #014667; } .SKU__price { font-family: inter, sans-serif; margin: 0px 0px 20px 0px; } .SKU__old-price { position: relative; color: #999; margin-right: 10px; font-size: 16px; display: inline-block; } .SKU__old-price::after { content: ''; position: absolute; left: 0; top: 50%; width: 103%; height: 1px; background: #999; transform: rotate(-12deg); transform-origin: center; } .SKU__new-price { color: #000; font-weight: bold; font-size: 20px; } @media (max-width: 600px) { .SKU { height: initial; max-height: initial; flex-direction: column; } .SKU__image-wrapper { height: 76px; margin: 20px 20px 0px 20px; width: initial; border-radius: initial; justify-content: flex-start; } .SKU__image { height: initial; width: initial; max-width: 150px; max-height: 100%; object-fit: cover; display: block; } .SKU__text { padding: 20px; position: relative; } .SKU__title { position: absolute; top: -76px; right: 20px; } .SKU__description { font-size: 16px; line-height: 24px; margin-bottom: 10px; color: #737373; } .SKU__button { margin-bottom: 10px; } } </style> <div class=SKU> <div class=SKU__image-wrapper> <img src={{image}} alt=Offer image class=SKU__image /> </div> <div class=SKU__text> <p class=SKU__title>{{title}}</p> <p class=SKU__description>{{description}}</p> <div class=SKU__price> <span class=SKU__old-price>{{oldPrice}}</span> <span class=SKU__new-price>{{newPrice}}</span> </div> <button class=SKU__button>{{buttonText}}</button> </div> </div>",
+    "small": "<style> .small { background: #fff; border-radius: 16px; box-shadow: 0 1px 4px 1px rgb(33, 33, 33, 0.2); overflow: hidden; display: flex; align-items: stretch; height: 188px; max-height: 188px; font-family: inter, sans-serif; } .small__image-wrapper { width: 282px; min-width: 180px; border-radius: 16px; flex-shrink: 0; overflow: hidden; } .small__image { width: 100%; height: 100%; object-fit: cover; display: block; } .small__text { padding: 20px 30px; } .small__title { font-size: 24px; font-weight: 500; line-height: 32px; margin: 0px 0px 10px 0px; color: #111827; max-height: 32px; max-width: 25ch; text-wrap: nowrap; } .small__description { font-size: 14px; color: #6b7280; margin: 0px 0px 20px 0px; line-height: 1.5; font-size: 16px; font-weight: 400; line-height: 24px; height: 48px; overflow: hidden; max-width: 38ch; } .small__cta-wrapper {} .small__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; text-wrap: nowrap; cursor: pointer; } .small__button:hover { background-color: #035C84; } .small__button:active, .small__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } @media (max-width: 600px) { .small { height: initial; max-height: initial; flex-direction: column; } .small__image-wrapper { height: 163px; width: 100%; margin-bottom: 10px; max-height: 76px; border-radius: 0px; max-height: 163px; margin-bottom: 0px; } .small__text { padding: 20px; } .small__title { font-size: 18px; line-height: 24px; margin-bottom: 10px; } .small__description { font-size: 16px; line-height: 24px; margin-bottom: 10px; color: #737373; } .small__button { margin-bottom: 10px; } } </style> <div class=small> <div class=small__image-wrapper> <img src='{{image}}' alt=Offer image class=small__image /> </div> <div class=small__text> <p class=small__title>{{title}}</p> <p class=small__description>{{description}}</p> <button class=small__button>{{buttonText}}</button> </div> </div>",
+    "footer": "<style> .footer__button { color: #fff; background-color: #0278AB; border-radius: 8px; padding: 8px 20px; max-width: 200px; border: none; font-size: 16px; line-height: 20px; white-space: nowrap; cursor: pointer; } .footer__button:hover { background-color: #035C84; } .footer__button:active, .footer__button:focus-visible { background-color: #014667; cursor: pointer; outline: none; } .footer { display: flex; align-items: center; justify-content: center; height: 60px; background-color: #fff; gap: 24px; border-top: 1px solid #000000; } @media (max-width: 600px) { .footer { justify-content: flex-start; padding-left: 10px; } .footer__title { display: none; } } </style> <div class=footer> <div class=footer__title>{{title}}</div> <button class=footer__button>{{buttonText}}</button> </div>"
+  },
+  "offers": [
     {
       "id": "offer_1",
-      "title": "Laptop Protection",
-      "description": "Add a 2-year protection plan for your laptop.",
-      "price": "99.99",
+      "title": "Device Protection",
+      "description": "Add protection for accidental damage and repairs.",
+      "price": "",
       "buttonText": "Protect Now",
-      "image": "https://example.com/laptop-protection.jpg",
+      "image": "Images/sec2.webp",
       "template": "carousel",
       "wrapper": "carousel_wrapper"
     },
     {
       "id": "offer_2",
-      "title": "Premium Laptop Sleeve",
-      "description": "A stylish sleeve to keep your laptop safe on the go.",
+      "title": "Laptop Sleeve",
+      "description": "Simple carry protection for your laptop.",
       "price": "29.99",
       "buttonText": "Shop Sleeve",
-      "image": "https://example.com/laptop-sleeve.jpg",
+      "image": "Images/sleeve.webp",
       "template": "SKU",
-      "wrapper": "right_tile_2"
+      "wrapper": "right_tile_1"
     },
     {
       "id": "offer_3",
       "title": "USB-C Docking Station",
-      "description": "Connect your laptop to extra monitors and accessories.",
+      "description": "Connect monitors and accessories through one hub.",
       "price": "119.99",
       "buttonText": "Add Dock",
-      "image": "https://example.com/docking-station.jpg",
+      "image": "Images/dockingStation.webp",
       "template": "SKU",
       "wrapper": "right_tile_2"
     },
     {
       "id": "offer_4",
-      "title": "Dell XPS 15 Accessory Kit",
+      "title": "DXS15 Accessory Kit",
       "description": "Includes charger, case, and screen protector.",
-      "price": "49.99",
+      "price": "",
       "buttonText": "Buy Kit",
-      "image": "https://example.com/dell-kit.jpg",
+      "image": "Images/DSXAccessories.webp",
       "template": "small",
       "wrapper": "right_tile_1"
     },
     {
       "id": "offer_5",
-      "title": "iPhone 14 Essentials",
-      "description": "Protective case and screen guard for your phone.",
-      "price": "39.99",
+      "title": "Screen Essentials",
+      "description": "Basic protection for your phone screen and case.",
+      "price": "",
       "buttonText": "Shop Essentials",
       "image": "https://example.com/iphone-kit.jpg",
       "template": "small",
@@ -60,134 +59,165 @@
     },
     {
       "id": "offer_6",
-      "title": "Galaxy Tab Accessory Pack",
-      "description": "Keyboard cover and stylus for your Samsung tablet.",
-      "price": "59.99",
+      "title": "Touch-screen Accessory",
+      "description": "Keyboard and stylus for easier tablet use.",
+      "price": "",
       "buttonText": "Get Pack",
-      "image": "https://example.com/tab-pack.jpg",
+      "image": "Images/stylus.webp",
       "template": "small",
-      "wrapper": "right_tile_1"
-    }, 
+      "wrapper": "right_tile_2"
+    },
     {
-  "id": "offer_7",
-  "title": "Device Protection Plan",
-  "description": "Extend your laptop coverage with a 2-year protection plan.",
-  "price": "89.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "carousel",
-  "wrapper": "carousel_wrapper"
-},
-{
-  "id": "offer_8",
-  "title": "Laptop Care Coverage",
-  "description": "Keep your laptop safe with extended 2-year protection.",
-  "price": "94.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "carousel",
-  "wrapper": "carousel_wrapper"
-},
-{
-  "id": "offer_9",
-  "title": "Extended Laptop Warranty",
-  "description": "Add extra peace of mind with a 2-year warranty extension.",
-  "price": "104.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "carousel",
-  "wrapper": "carousel_wrapper"
-},
-{
-  "id": "offer_10",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "carousel",
-  "wrapper": "carousel_wrapper"
-},
-{
-  "id": "offer_11",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "banner",
-  "wrapper": "position_2"
-},
-{
-  "id": "offer_12",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "banner",
-  "wrapper": "position_2"
-},
-{
-  "id": "offer_13",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "banner",
-  "wrapper": "position_2"
-},
-{
-  "id": "offer_14",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "footer",
-  "wrapper": "sticky-footer"
-},
-{
-  "id": "offer_15",
-  "title": "Premium Laptop Protection",
-  "description": "Secure your laptop with premium 2-year protection coverage.",
-  "price": "109.99",
-  "buttonText": "Protect Now",
-  "image": "https://example.com/laptop-protection.jpg",
-  "template": "footer",
-  "wrapper": "sticky-footer"
-}
+      "id": "offer_7",
+      "title": "Device Protection Plan",
+      "description": "Extend your laptop coverage with a 2-year protection plan.",
+      "price": "89.99",
+      "buttonText": "Protect Now",
+      "image": "Images/protec2.webp",
+      "template": "carousel",
+      "wrapper": "carousel_wrapper"
+    },
+    {
+      "id": "offer_8",
+      "title": "Plan upgrade",
+      "description": "Get help with setup, troubleshooting, and everyday issues.",
+      "price": "94.99",
+      "buttonText": "Add Plan",
+      "image": "Images/upg.webp",
+      "template": "carousel",
+      "wrapper": "carousel_wrapper"
+    },
+    {
+      "id": "offer_9",
+      "title": "Extended Laptop Warranty",
+      "description": "Add extra peace of mind with a 2-year warranty extension.",
+      "price": "104.99",
+      "buttonText": "Protect Now",
+      "image": "Images/extend.webp",
+      "template": "carousel",
+      "wrapper": "carousel_wrapper"
+    },
+    {
+      "id": "offer_10",
+      "title": "Security Pack",
+      "description": "Secure your laptop with premium 2-year protection coverage.",
+      "price": "109.99",
+      "buttonText": "Protect Now",
+      "image": "Images/securityPack.webp",
+      "template": "carousel",
+      "wrapper": "carousel_wrapper"
+    },
+    {
+      "id": "offer_11",
+      "title": "Printer Protection",
+      "description": "Secure your laptop with premium 2-year protection coverage.",
+      "price": "109.99",
+      "buttonText": "Protect Now",
+      "image": "Images/prpotection.webp",
+      "template": "banner",
+      "wrapper": "position_2"
+    },
+    {
+      "id": "offer_12",
+      "title": "Performance Boost",
+      "description": "Improve speed and responsiveness with system optimization.",
+      "price": "109.99",
+      "buttonText": "Boost Device",
+      "image": "Images/boost.webp",
+      "template": "banner",
+      "wrapper": "position_2"
+    },
+    {
+      "id": "offer_13",
+      "title": "Laptop Protection",
+      "description": "Secure your laptop with premium 2-year protection coverage.",
+      "price": "109.99",
+      "buttonText": "Protect Now",
+      "image": "Images/pcpotection.webp",
+      "template": "banner",
+      "wrapper": "position_2"
+    },
+    {
+      "id": "offer_14",
+      "title": "Cloud Backup",
+      "description": "Securely store your important files and documents online.",
+      "price": "109.99",
+      "buttonText": "Enable Backup",
+      "image": "https://example.com/laptop-protection.jpg",
+      "template": "footer",
+      "wrapper": "sticky-footer"
+    },
+    {
+      "id": "offer_15",
+      "title": "Printer Essentials",
+      "description": "Keep your printer running smoothly with basic support coverage.",
+      "price": "109.99",
+      "buttonText": "View Plan",
+      "image": "https://example.com/laptop-protection.jpg",
+      "template": "footer",
+      "wrapper": "sticky-footer"
+    },
+    {
+      "id": "offer_16",
+      "title": "PC Essentials",
+      "description": "Keep your printer running smoothly with basic support coverage.",
+      "price": "109.99",
+      "buttonText": "View Plan",
+      "image": "https://example.com/laptop-protection.jpg",
+      "template": "footer",
+      "wrapper": "sticky-footer"
+    }
   ],
   "devices": [
     {
       "id": "device1",
-      "name": "Dell XPS 15",
+      "name": "HP Printer",
       "productNumber": "325321",
       "serial": "DXPS15-12345",
-      "warranty": "2 years",
-      "image": "https://example.com/dell.jpg"
+      "warranty": "In warranty",
+      "image": "Images/printer1.webp"
     },
     {
       "id": "device2",
-      "name": "iPhone 14",
+      "name": "HP Laptop",
       "productNumber": "5324325",
       "serial": "IP14-67890",
-      "warranty": "1 year",
-      "image": "https://example.com/iphone.jpg"
+      "warranty": "Expired",
+      "image": "Images/PC1.webp"
     },
     {
       "id": "device3",
-      "name": "Samsung Galaxy Tab",
+      "name": "HP Desktop",
       "productNumber": "3215325",
       "serial": "SGTAB-54321",
-      "warranty": "1 year",
-      "image": "https://example.com/tab.jpg"
+      "warranty": "In warranty",
+      "image": "Images/PC2.webp"
     }
   ],
   "deviceOffers": {
-    "device1": ["offer_1",  "offer_3","offer_4", "offer_7", "offer_8", "offer_11", "offer_15"],
-    "device2": ["offer_1", "offer_2", "offer_3", "offer_8", "offer_9", "offer_12", "offer_15"],
-    "device3": ["offer_1", "offer_2",  "offer_6", "offer_10", "offer_9", "offer_13", "offer_14"]
+    "device1": [
+      "offer_1",
+      "offer_3",
+      "offer_4",
+      "offer_7",
+      "offer_8",
+      "offer_11",
+      "offer_15"
+    ],
+    "device2": [
+      "offer_1",
+      "offer_2",
+      "offer_3",
+      "offer_12",
+      "offer_14"
+    ],
+    "device3": [
+      "offer_1",
+      "offer_2",
+      "offer_6",
+      "offer_10",
+      "offer_9",
+      "offer_13"
+    ]
   }
 }
