@@ -91,21 +91,93 @@ section {
   border-radius: 4px;
 }
 
-.drop_container {
-  margin-bottom: 16px;
+.dd-wrapper {
+  position: relative;
+  width: 160px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  user-select: none;
+  height: 35px;
+    border-radius: 10px;
+    border: 1px solid #585858;
+}
+.dd-wrapper:hover{
+background-color: rgba(88, 88, 88, 0.05);
+}
+.dd-selected {
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 0px 0px 12px 12px;
+    border-radius: 12px;
+    color: #374151;
+    cursor: pointer;
+    border-radius: 12px 12px 0px 0px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;     z-index: 55;
+    position: absolute;
+    width: 134px;
+}
+
+.dd-selected:hover {
+  border-color: #0278AB;
+}
+
+.dd-wrapper.open .dd-selected {
+ 
+}
+
+.dd-arrow {
   display: flex;
   align-items: center;
-  gap: 12px;
+  color: #6b7280;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
 }
 
-.drop_container .deviceInfoLabel {
-  margin: 0;
-  font-weight: 600;
+.dd-wrapper.open .dd-arrow {
+  transform: rotate(180deg);
+}
+
+.dd-list {
+ display: none;
+    position: absolute;
+    padding-top: 34px;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 0;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 29%);
+}
+.dd-wrapper.open{
+border: 1px solid transparent !important;}
+.dd-wrapper.open .dd-list {
+  display: block;
+}
+
+.dd-item {
+  padding: 9px 12px;
+  cursor: pointer;
   color: #374151;
   font-size: 14px;
-  white-space: nowrap;
+}
+.dd-item:nth-of-type(2) {
+  border-top: 1px solid #d1d5db;
+  padding: 9px 12px;
+  cursor: pointer;
+  color: #374151;
+  font-size: 14px;
 }
 
+.dd-item:hover{
+  background: #0278AB;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.dd-item.selected { display: none;}
 .deviceDropdown {
   width: 160px;
   padding: 8px 12px;
@@ -135,7 +207,13 @@ border-radius: 8;
   flex-direction: column;
   gap: 0px;
 }
-
+.deviceInfoLabel {
+  margin: 0;
+  padding: 4px 0;
+  font-size: 14px;
+  color: #000000;
+  line-height: 1.4;
+}
 .deviceInfoProperty {
   margin: 0;
   padding: 4px 0;
@@ -143,7 +221,11 @@ border-radius: 8;
   color: #6b7280;
   line-height: 1.4;
 }
-
+.drop_container{
+  display: flex;
+    gap: 10px;
+    align-items: center;
+}
 .deviceInfoProperty span {
   color: black;
 }
@@ -237,7 +319,7 @@ carousel-track {
   left: 0;
   width: 100%;
   opacity: 0;
-  transform: scale(0.95);
+  transform: scale(0.99);
   transition: opacity 0.5s ease, transform 0.5s ease;
   pointer-events: none;
 }

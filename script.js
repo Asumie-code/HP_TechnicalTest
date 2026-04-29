@@ -35,7 +35,19 @@ function selectDevice(productValue) {
   appendTemplate(appData, selectedDevice);
 
   const dropdown = document.getElementById("productDropdown");
-  if (dropdown) dropdown.value = selectedDevice.id;
+  // replace this line:
+if (dropdown) dropdown.value = selectedDevice.id;
+
+// with this:
+if (dropdown) {
+  const items = dropdown.querySelectorAll(".dd-item");
+  items.forEach(item => {
+    item.classList.toggle("selected", item.dataset.value === selectedDevice.id);
+  });
+  const label = dropdown.querySelector(".dd-label");
+  const active = dropdown.querySelector(".dd-item.selected");
+  if (label && active) label.textContent = active.textContent;
+}
   slide();
 }
 
@@ -145,16 +157,43 @@ function emptyWrappers() {
  * @param {Array} devices - Array of device objects
  */
 function populateDeviceDropdown(devices = []) {
-  const dropdown = document.getElementById("productDropdown");
+  const wrapper = document.getElementById("productDropdown");
+  const label = wrapper.querySelector(".dd-label");
+  const list = wrapper.querySelector(".dd-list");
 
-  dropdown.innerHTML = "";
+  list.innerHTML = "";
+
   devices.forEach((device, index) => {
-    const option = document.createElement("option");
-    option.value = device.id;
-    option.id = device.id;
-    option.textContent = device.serial || device.name || device.id;
-    if (index === 0) option.selected = true;
-    dropdown.appendChild(option);
+    const item = document.createElement("div");
+    item.className = "dd-item";
+    item.dataset.value = device.id;
+    item.textContent = device.serial || device.name || device.id;
+    if (index === 0) {
+      label.textContent = item.textContent;
+      item.classList.add("selected");
+    }
+    list.appendChild(item);
+  });
+
+  // toggle open/close
+  wrapper.querySelector(".dd-selected").addEventListener("click", () => {
+    wrapper.classList.toggle("open");
+  });
+
+  // item click
+  list.addEventListener("click", (e) => {
+    const item = e.target.closest(".dd-item");
+    if (!item) return;
+    label.textContent = item.textContent;
+    list.querySelectorAll(".dd-item").forEach(i => i.classList.remove("selected"));
+    item.classList.add("selected");
+    wrapper.classList.remove("open");
+    handleProductSelection(item.dataset.value);
+  });
+
+  // close on outside click
+  document.addEventListener("click", (e) => {
+    if (!wrapper.contains(e.target)) wrapper.classList.remove("open");
   });
 }
 
@@ -182,9 +221,10 @@ function handleEvent(type = "display", offerId) {
     type,
     id: offerId || null,
     timestamp: new Date().toLocaleString("en-GB").replace(",", ""),
-    product: document.getElementById("productDropdown").value
+product: document.getElementById("productDropdown").querySelector(".dd-item.selected")?.dataset.value || ""
   };
-  const selectedOption = document.getElementById("productDropdown").value;
+  const selectedOption = document.getElementById("productDropdown").querySelector(".dd-item.selected")?.dataset.value || "";
+
   const log = document.getElementById("event-log");
   const li = document.createElement("li");
   li.className = "event-item";

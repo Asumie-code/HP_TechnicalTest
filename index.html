@@ -19,9 +19,19 @@
         <div>
             <div>
                 <div class="drop_container">
-                    <p class="deviceInfoLabel">Select device:</p> <select id="productDropdown" class="deviceDropdown">
-                    </select>
-                </div>
+  <p class="deviceInfoLabel">Select device:</p>
+  <div class="dd-wrapper" id="productDropdown">
+    <div class="dd-selected">
+      <span class="dd-label"></span>
+      <span class="dd-arrow">
+        <svg viewBox="0 0 14 14" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="2,4 7,10 12,4"/>
+        </svg>
+      </span>
+    </div>
+    <div class="dd-list"></div>
+  </div>
+</div>
                 <div class="deviceInfoProperties">
                     <p class="deviceInfoProperty">{deviceName}</p>
                     <p class="deviceInfoProperty">{warrantyStatus}</p>
