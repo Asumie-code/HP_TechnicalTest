@@ -33,6 +33,34 @@
         border-top: 1px solid #000000;
     }
 
+    .footer-close-btn {
+        position: absolute;
+        right: 18px;
+        bottom: 18px;
+        background: none;
+        border: none;
+        font-size: 28px;
+        cursor: pointer;
+        color: #6b7280;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .footer-close-btn:hover {
+        color: #111827;
+        background-color: #f3f4f6;
+    }
+
+    .footer-close-btn:active {
+        background-color: #e5e7eb;
+    }
+
     @media (max-width: 600px) {
         .footer {
             justify-content: flex-start;
@@ -45,5 +73,6 @@
     }
 </style>
 <div class=footer>
-    <div class=footer__title>{{title}}</div> <button class=footer__button>{{buttonText}}</button>
+    <div class=footer__title>{{title}}</div> <button class=footer__button>{{buttonText}}</button> <button
+        id="close-footer" class="footer-close-btn" aria-label="Close footer">x</button>
 </div>

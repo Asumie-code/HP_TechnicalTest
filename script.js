@@ -3,161 +3,50 @@ let appData = {};
 let currentDevice = null;
 
 /**
- * Initializes the page by populating dropdown and serial list, then selects the default device.
- * @param {Object} data - The JSON data from data.json
+ * Entry point of the application.
+ * Runs init() after the DOM is fully loaded.
  */
-function renderData(data) {
-  if (!data) return;
+document.addEventListener("DOMContentLoaded", init);
 
-  populateDeviceDropdown(data.devices);
-  renderSerialNumberList(data.devices);
+/**
+ * Initializes the application on DOM load.
+ * - Fetches data.json
+ * - Stores data in global state
+ * - Renders initial UI
+ * - Starts carousel
+ * - Attaches dropdown change listener
+ */
+function init() {
+  fetch("data.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Failed to load data.json: ${response.status} ${response.statusText}`,
+        );
+      }
+      return response.json();
+    })
+    .then((data) => {
+      appData = data;
+        renderDeviceDetails(data.devices);
+        renderDeviceOffers();
+    })
+    .catch((error) => console.error("Error loading data:", error));
 
-  const defaultDevice = data.devices?.[0];
-  if (defaultDevice) {
-    selectDevice(defaultDevice.id);
+  const dropdown = document.getElementById("deviceDropdown");
+  if (dropdown) {
+    dropdown.addEventListener("change", (event) => {
+      renderDeviceOffers(event.target.value);
+    });
   }
 }
 
 /**
- * Selects a device by ID or serial, updates the current device, renders it, and appends its offers.
- * @param {string} productValue - The device ID or serial number
- */
-function selectDevice(productValue) {
-  if (!productValue || !appData.devices) return;
-
-  const selectedDevice = appData.devices.find(
-    (device) => device.id === productValue || device.serial === productValue,
-  );
-  if (!selectedDevice) return;
-
-  currentDevice = selectedDevice;
-  renderDevice(selectedDevice);
-  appendTemplate(appData, selectedDevice);
-
-  const dropdown = document.getElementById("productDropdown");
-  // replace this line:
-if (dropdown) dropdown.value = selectedDevice.id;
-
-// with this:
-if (dropdown) {
-  const items = dropdown.querySelectorAll(".dd-item");
-  items.forEach(item => {
-    item.classList.toggle("selected", item.dataset.value === selectedDevice.id);
-  });
-  const label = dropdown.querySelector(".dd-label");
-  const active = dropdown.querySelector(".dd-item.selected");
-  if (label && active) label.textContent = active.textContent;
-}
-  slide();
-}
-
-/**
- * Renders the selected device's image, info properties, and highlights the serial in the list.
- * @param {Object} device - The device object from JSON
- */
-function renderDevice(device) {
-  if (!device) return;
-
-  const image = document.querySelector(".deviceImage");
-  if (image) {
-    image.src = device.image || "";
-    image.alt = device.name ? `${device.name} image` : "Device image";
-  }
-
-  const infoProperties = Array.from(
-    document.querySelectorAll(".deviceInfoProperty"),
-  );
-  const values = [
-    `<span>Product name:</span> ${device.name}` || "",
-    `<span>Warranty status:</span> ${device.warranty}` || "",
-    `<span>Product Number: </span>${device.productNumber}` || "",
-  ];
-  infoProperties.forEach((prop, index) => {
-    prop.innerHTML = values[index] || "";
-  });
-
-  const serialItems = document.querySelectorAll(".deviceSerialNumber");
-  serialItems.forEach((item) => {
-    item.classList.toggle(
-      "deviceSerialNumberSelected",
-      item.textContent.trim() === device.serial,
-    );
-  });
-}
-
-/**
- * Replaces placeholders in the template with offer data.
- * @param {Object} offer - The offer object
- * @returns {string} The rendered HTML string
- */
-function updateTemplate(offer) {
-  if (!offer || !offer.template || !appData.templates) return "";
-
-  const templateKey = offer.template;
-  const templateSource = appData.templates[templateKey];
-  if (!templateSource) return "";
-
-  return templateSource.replace(/{{\s*(\w+)\s*}}/g, (match, field) => {
-    if (field in offer) return offer[field];
-    return "";
-  });
-}
-
-/**
- * Appends the offers for the selected device to their respective sections.
- * @param {Object} data - The JSON data
- * @param {Object} device - The selected device
- */
-function appendTemplate(data, device) {
-  if (!data || !device || !data.deviceOffers) return;
-
-  emptyWrappers();
-
-  const offerIds = data.deviceOffers[device.id] || [];
-  offerIds.forEach((offerId) => {
-    const offer = data.offers?.find((entry) => entry.id === offerId);
-    if (!offer) return;
-
-    const htmlString = updateTemplate(offer);
-    const targetSection = document.getElementById(offer.wrapper);
-    if (targetSection && htmlString) {
-      targetSection.insertAdjacentHTML("beforeend", htmlString);
-      handleEvent("display", offerId);
-      Array.from(targetSection.children).forEach((child) => {
-        child.addEventListener("click", () => handleEvent("click", offerId));
-        child.addEventListener("focusin", () => handleEvent("focus", offerId));
-      });
-    }
-  });
-}
-
-/**
- * Handles the product dropdown selection by calling selectDevice.
- * @param {string} productValue - The selected value
- */
-function handleProductSelection(productValue) {
-  selectDevice(productValue);
-}
-
-/**
- * Clears the HTML content of the wrapper sections.
- */
-function emptyWrappers() {
-  document.getElementById("carousel_wrapper").innerHTML = "";
-  document.getElementById("right_tile_1").innerHTML = "";
-  document.getElementById("right_tile_2").innerHTML = "";
-  document.getElementById("position_2").innerHTML = "";
-  document.getElementById("sticky-footer").querySelectorAll(".footer").forEach(el => el.remove());
-  document.getElementById("sticky-footer").querySelectorAll("style").forEach(el => el.remove());
-
-}
-
-/**
- * Populates the product dropdown with device options.
+ * Populates the device dropdown with device options.
  * @param {Array} devices - Array of device objects
  */
-function populateDeviceDropdown(devices = []) {
-  const wrapper = document.getElementById("productDropdown");
+function renderDeviceDetails(devices) {
+  const wrapper = document.getElementById("deviceDropdown");
   const label = wrapper.querySelector(".dd-label");
   const list = wrapper.querySelector(".dd-list");
 
@@ -166,8 +55,8 @@ function populateDeviceDropdown(devices = []) {
   devices.forEach((device, index) => {
     const item = document.createElement("div");
     item.className = "dd-item";
-    item.dataset.value = device.id;
-    item.textContent = device.serial || device.name || device.id;
+    item.dataset.value = device.serial;
+    item.textContent = device.serial || device.name || device.serial;
     if (index === 0) {
       label.textContent = item.textContent;
       item.classList.add("selected");
@@ -188,7 +77,8 @@ function populateDeviceDropdown(devices = []) {
     list.querySelectorAll(".dd-item").forEach(i => i.classList.remove("selected"));
     item.classList.add("selected");
     wrapper.classList.remove("open");
-    handleProductSelection(item.dataset.value);
+      renderDeviceOffers(item.dataset.value);
+
   });
 
   // close on outside click
@@ -198,37 +88,136 @@ function populateDeviceDropdown(devices = []) {
 }
 
 /**
- * Renders the list of device serial numbers with click handlers.
- * @param {Array} devices - Array of device objects
+ * Selects a device by ID, updates the current device, renders it, and appends its offers.
+ * @param {string} chosenDeviceID - The device ID
  */
-function renderSerialNumberList(devices = []) {
-  const selector = document.querySelector(".deviceSerialNumberSelector");
-  if (!selector) return;
+function renderDeviceOffers(chosenDeviceID = appData.devices[0].serial) {
+  currentDevice = appData.devices.find(
+    (device) => device.serial === chosenDeviceID
+  );
 
-  selector.innerHTML = "";
-  devices.forEach((device) => {
-    const item = document.createElement("div");
-    item.className = "deviceSerialNumber";
-    item.dataset.deviceId = device.id;
-    item.textContent = device.serial || device.id;
-    item.addEventListener("click", () => selectDevice(device.id));
-    selector.appendChild(item);
+  renderDevice(currentDevice);
+  appendOffers(appData, currentDevice);
+
+  const dropdown = document.getElementById("deviceDropdown");
+  const items = dropdown.querySelectorAll(".dd-item");
+
+  items.forEach(item => {
+    item.classList.toggle("selected", item.dataset.value === currentDevice.serial);
+  });
+  const label = dropdown.querySelector(".dd-label");
+  const active = dropdown.querySelector(".dd-item.selected");
+  label.textContent = active.textContent;
+
+}
+
+
+
+/**
+ * Renders the selected device's image, info properties, and highlights the serial in the list.
+ * @param {Object} deviceObject: { image, name, warranty, productNumber } - The device object from JSON
+ */
+function renderDevice({ image, name, warranty, productNumber }) {
+  document.querySelector(".deviceImage").src = image;
+
+  document.querySelectorAll(".deviceInfoProperty").forEach((deviceInfo, index) => {
+    deviceInfo.innerHTML = [
+      `<span>Product name:</span> ${name}`,
+      `<span>Warranty status:</span> ${warranty}`,
+      `<span>Product Number:</span> ${productNumber}`
+    ][index];
   });
 }
 
-function handleEvent(type = "display", offerId) {
+
+
+/**
+ * Replaces placeholders in the template with offer content.
+ * @param {Object} offer - The offer object
+ * @returns {string} The rendered HTML string
+ */
+function updateTemplate(offer) {
+  if (!offer || !offer.template || !appData.templates) return "";
+// render error page
+  const templateKey = offer.template;
+  const templateHTML = appData.templates[templateKey];
+  if (!templateHTML) return "";
+
+  return templateHTML.replace(/{{\s*(\w+)\s*}}/g, (match, field) => {
+    if (field in offer) return offer[field];
+    return "";
+  });
+}
+
+/**
+ * Appends the offers for the selected device to their respective sections.
+ * @param {Object} data - The JSON data
+ * @param {Object} device - The selected device
+ */
+function appendOffers(data, device) {
+  if (!data || !device || !data.deviceOffers) return;
+
+  emptyContainers();
+
+  const offerIds = data.deviceOffers[device.id];
+
+  offerIds.forEach((offerId) => {
+    const offer = data.offers?.find((entry) => entry.id === offerId);
+    if (!offer) return;
+
+    const htmlString = updateTemplate(offer);
+    const targetSection = document.getElementById(offer.wrapper);
+
+    if (!targetSection || !htmlString) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = htmlString;
+
+    Array.from(wrapper.children).forEach((offerEl) => {
+      offerEl.addEventListener("click", () => handleEvent("click", offerId));
+      offerEl.addEventListener("focusin", () => handleEvent("focus", offerId));
+
+      targetSection.appendChild(offerEl);
+    });
+
+    handleEvent("impression", offerId);
+  });
+  
+  slide();
+}
+
+/**
+ * Clears offers from the page.
+ */
+function emptyContainers() {
+  ["carousel_wrapper", "right_tile_1", "right_tile_2", "position_2"]
+    .forEach(id => (document.getElementById(id).innerHTML = ""));
+  document.getElementById("sticky-footer").querySelectorAll(".footer, style")
+    .forEach(el => el.remove());
+}
+
+
+
+/**
+ * Logs a user or system event into an on-screen event log and console.
+ * Keeps only the 4 most recent events visible in the UI.
+ *
+ * @param {string} eventType - Type of event ("impression", "click", "focus", etc.)
+ * @param {string|number} offerId - offer ID interacted with
+ */
+function handleEvent(eventType = "display", offerId) {
   const event = {
-    type,
+    eventType,
     id: offerId || null,
     timestamp: new Date().toLocaleString("en-GB").replace(",", ""),
-product: document.getElementById("productDropdown").querySelector(".dd-item.selected")?.dataset.value || ""
+    device: document.getElementById("deviceDropdown").querySelector(".dd-item.selected")?.dataset.value || ""
   };
-  const selectedOption = document.getElementById("productDropdown").querySelector(".dd-item.selected")?.dataset.value || "";
+  const selectedOption = appData.devices.find(d => d.serial === document.querySelector(".dd-item.selected")?.dataset.value)?.id || "";
 
   const log = document.getElementById("event-log");
   const li = document.createElement("li");
-  li.className = "event-item";
-  li.textContent = `event : ${event.type},_______offer: ${event.id},_______for: ${selectedOption},_______at: ${event.timestamp}`;
+  li.className = `event-item ${event.eventType}`;
+  li.innerHTML = `<span class="logItem"><span style="font-weight: bold;">event:</span> ${event.eventType}</span><span class="logItem"><span style="font-weight: bold;">offer:</span> ${event.id}</span><span class="logItem"><span style="font-weight: bold;">for:</span> ${selectedOption}</span><span class="logItem"><span style="font-weight: bold;">at:</span> ${event.timestamp}</span>`;
   log.prepend(li);
 
   // Remove oldest item if exceeds 4 elements
@@ -240,132 +229,113 @@ product: document.getElementById("productDropdown").querySelector(".dd-item.sele
   console.log(event);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  fetch("data.json")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `Failed to load data.json: ${response.status} ${response.statusText}`,
-        );
-      }
-      return response.json();
-    })
-    .then((data) => {
-      appData = data;
-      renderData(appData);
-      slide();
-      addCloseButton();
-    })
-    .catch((error) => console.error("Error loading data:", error));
-
-  const dropdown = document.getElementById("productDropdown");
-  if (dropdown) {
-    dropdown.addEventListener("change", (event) => {
-      handleProductSelection(event.target.value);
-    });
-  }
-});
-
-function addCloseButton() {
-  const footer = document.getElementById("sticky-footer");
-  if (!footer) return;
-
-  const closeBtn = document.createElement("button");
-  closeBtn.id = "close-footer";
-  closeBtn.className = "footer-close-btn";
-  closeBtn.setAttribute("aria-label", "Close footer");
-  closeBtn.textContent = "×";
-
-  closeBtn.addEventListener("click", () => {
-    footer.style.display = "none";
-  });
-
-  footer.appendChild(closeBtn);
-}
-
+/**
+ * Initializes the carousel behavior (auto-slide, navigation, pause on hover, swipe support).
+ * Handles:
+ * - slide switching (next/prev)
+ * - auto rotation loop
+ * - mouse interactions (hover pause)
+ * - touch interactions (swipe)
+ * - UI controls (buttons + visibility)
+ */
 function slide() {
-  document.querySelectorAll(".carousel-container").forEach((container) => {
-    const slides = Array.from(container.querySelectorAll(".carousel"));
-    const nextBtn = container.querySelector(".carousel-next");
-    const prevBtn = container.querySelector(".carousel-prev");
+  const container = document.querySelector(".carousel-container");
+  const slides = Array.from(container.querySelectorAll(".carousel"));
+  const nextBtn = container.querySelector(".carousel-next");
+  const prevBtn = container.querySelector(".carousel-prev");
 
-    let index = 0;
-    let timer = null;
-    let paused = false;
+  // state
+  let index = 0;
+  let timer = null;
+  let paused = false;
+  let startX = 0;
 
-    const update = () => {
-      slides.forEach((s, i) => {
-        s.classList.toggle("active", i === index);
-      });
-    };
+  // core logic
+  const update = () => {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+  };
 
-    const schedule = () => {
-      timer = setTimeout(() => {
-        if (!paused) next();
-        schedule();
-      }, 5000);
-    };
-
-    const next = () => {
-      index = (index + 1) % slides.length;
-      update();
-    };
-
-    const prev = () => {
-      index = (index - 1 + slides.length) % slides.length;
-      update();
-    };
-
-    const start = () => {
-      paused = false;
-      clearTimeout(timer);
-      schedule();
-    };
-
-    const stop = () => {
-      paused = true;
-      clearTimeout(timer);
-    };
-
-    nextBtn.onclick = () => {
-      next();
-      start(); // resets cycle cleanly
-    };
-
-    prevBtn.onclick = () => {
-      prev();
-      start();
-    };
-
-    container.addEventListener("mouseenter", stop);
-    container.addEventListener("mouseleave", start);
-
+  const next = () => {
+    index = (index + 1) % slides.length;
     update();
+  };
+
+  const prev = () => {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  };
+
+  // autoplay
+  const schedule = () => {
+    timer = setTimeout(() => {
+      if (!paused) next();
+      schedule();
+    }, 5000);
+  };
+
+  const start = () => {
+    paused = false;
+    clearTimeout(timer);
+    schedule();
+  };
+
+  const stop = () => {
+    paused = true;
+    clearTimeout(timer);
+  };
+
+  // controls
+  nextBtn.onclick = () => {
+    next();
     start();
-    handleCarouselControls()
-    updateFooterButtonVisibility();
+  };
+
+  prevBtn.onclick = () => {
+    prev();
+    start();
+  };
+
+  // mouse interactions
+  container.addEventListener("mouseenter", stop);
+  container.addEventListener("mouseleave", start);
+
+  // touch interactions (swipe)
+  container.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
   });
+
+  container.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = endX - startX;
+
+    const threshold = 50;
+    if (Math.abs(diff) < threshold) return;
+
+    if (diff < 0) next();
+    else prev();
+
+    start();
+  });
+
+  // init
+  update();
+  start();
+  toggleCarouselControls();
 }
 
-function handleCarouselControls() {
+/**
+ * Shows or hides carousel navigation controls depending on
+ * how many slides exist in the carousel.
+ */
+function toggleCarouselControls() {
   const carousel = document.getElementById("carousel_wrapper");
   const controls = document.querySelector(".carousel-controls");
-
-  if (!carousel || !controls) return;
 
   if (carousel.children.length <= 1) {
     controls.style.display = "none";
   } else {
-    controls.style.display = "flex"; 
-  }
-}
-function updateFooterButtonVisibility() {
-  const footer = document.getElementById("sticky-footer");
-  const closeBtn = document.querySelector(".footer-close-btn");
-
-  const hasFooter = footer && footer.querySelector(".footer");
-
-  if (closeBtn) {
-    closeBtn.style.display = hasFooter ? "block" : "none";
+    controls.style.display = "flex";
   }
 }
