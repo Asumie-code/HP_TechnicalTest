@@ -197,28 +197,26 @@
   },
   "deviceOffers": {
     "device_1": [
+      "offer_8",
       "offer_1",
       "offer_3",
       "offer_4",
       "offer_7",
-      "offer_8",
       "offer_11",
       "offer_15"
     ],
     "device_2": [
-      "offer_1",
+      "offer_9",
       "offer_2",
       "offer_3",
-      "offer_12",
-      "offer_14"
+      "offer_13"
     ],
     "device_3": [
-      "offer_1",
-      "offer_2",
-      "offer_6",
       "offer_10",
-      "offer_9",
-      "offer_13"
+      "offer_3",
+      "offer_6",
+      "offer_7",
+      "offer_12"
     ]
   }
 }

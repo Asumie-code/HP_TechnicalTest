@@ -113,7 +113,7 @@ h2 {
 
 .dd-wrapper {
   position: relative;
-  width: 160px;
+  width: 163px;
   height: 35px;
   font-size: 14px;
   font-family: "Inter", sans-serif;
@@ -132,18 +132,23 @@ h2 {
 
 .dd-selected {
   position: absolute;
-  width: 134px;
+  width: 121px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
+  padding: 10px 21px;
   color: #374151;
   cursor: pointer;
   border-radius: 12px 12px 0 0;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   z-index: 55;
 }
-
+.dd-selected:focus-visible{
+  border-radius: 10px;
+  outline: #0278AB solid 2px;
+  background-color: #0278ab27;
+  padding: 9px 21px;
+}
 .dd-selected:hover {
   border-color: #0278AB;
 }
@@ -165,7 +170,8 @@ h2 {
   position: absolute;
   left: 0;
   right: 0;
-  padding-top: 34px;
+  padding: 10px;
+  padding-top: 44px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgb(0 0 0 / 29%);
@@ -176,21 +182,23 @@ h2 {
 .dd-wrapper.open .dd-list {
   display: block;
 }
-
+.dd-wrapper.open .dd-selected {
+  border-bottom: 1px solid #d1d5db;
+}
 .dd-item {
   padding: 9px 12px;
   font-size: 14px;
   color: #374151;
   cursor: pointer;
 }
-
-.dd-item:nth-of-type(2) {
-  border-top: 1px solid #d1d5db;
+.dd-item:not(:active){
+padding-top: 10px;
 }
 
-.dd-item:hover {
+.dd-item:hover, .dd-item:focus-visible {
   background: #0278AB;
   color: #fff;
+  outline: none;
   border-radius: 8px;
 }
 

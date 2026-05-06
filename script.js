@@ -49,7 +49,9 @@ function renderDeviceDetails(devices) {
   const wrapper = document.getElementById("deviceDropdown");
   const label = wrapper.querySelector(".dd-label");
   const list = wrapper.querySelector(".dd-list");
+  const selected = wrapper.querySelector(".dd-selected");
 
+  selected.tabIndex = 0;
   list.innerHTML = "";
 
   devices.forEach((device, index) => {
@@ -57,34 +59,74 @@ function renderDeviceDetails(devices) {
     item.className = "dd-item";
     item.dataset.value = device.serial;
     item.textContent = device.serial || device.name || device.serial;
+    item.tabIndex = 0;
+
     if (index === 0) {
       label.textContent = item.textContent;
       item.classList.add("selected");
     }
+
     list.appendChild(item);
   });
 
-  // toggle open/close
-  wrapper.querySelector(".dd-selected").addEventListener("click", () => {
+  // toggle open/close (mouse)
+  selected.addEventListener("click", () => {
     wrapper.classList.toggle("open");
+  });
+
+  // toggle open/close (keyboard)
+  selected.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      wrapper.classList.toggle("open");
+    }
   });
 
   // item click
   list.addEventListener("click", (e) => {
     const item = e.target.closest(".dd-item");
     if (!item) return;
-    label.textContent = item.textContent;
-    list.querySelectorAll(".dd-item").forEach(i => i.classList.remove("selected"));
-    item.classList.add("selected");
-    wrapper.classList.remove("open");
-      renderDeviceOffers(item.dataset.value);
 
+    selectItem(item);
+  });
+
+  // item keyboard select + navigation
+  list.addEventListener("keydown", (e) => {
+    const item = e.target.closest(".dd-item");
+    if (!item) return;
+
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      selectItem(item);
+    }
+
+    const items = Array.from(list.querySelectorAll(".dd-item"));
+    const currentIndex = items.indexOf(document.activeElement);
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      items[currentIndex + 1]?.focus();
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      items[currentIndex - 1]?.focus();
+    }
   });
 
   // close on outside click
   document.addEventListener("click", (e) => {
     if (!wrapper.contains(e.target)) wrapper.classList.remove("open");
   });
+
+  function selectItem(item) {
+    label.textContent = item.textContent;
+    list.querySelectorAll(".dd-item").forEach(i => i.classList.remove("selected"));
+    item.classList.add("selected");
+    wrapper.classList.remove("open");
+
+    renderDeviceOffers(item.dataset.value);
+  }
 }
 
 /**
